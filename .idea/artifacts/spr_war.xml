@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="spr:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>spr</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="spr2-ara.war">
+      <element id="artifact" artifact-name="spr:war exploded" />
+    </root>
+  </artifact>
+</component>
