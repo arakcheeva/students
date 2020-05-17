@@ -3,9 +3,8 @@ package com.company.servlet;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import com.company.servlet.entity.User;
-import com.company.servlet.entity.UserSession;
 
-public class SessionFactory {
+public class SF {
     private static org.hibernate.SessionFactory sf;
 
     static {
@@ -30,7 +29,7 @@ public class SessionFactory {
         sf = cfg.buildSessionFactory(builder.build());
     }
 
-    private SessionFactory(){}
+    private SF(){}
 
     public static org.hibernate.SessionFactory getInstance(){
         return sf;
