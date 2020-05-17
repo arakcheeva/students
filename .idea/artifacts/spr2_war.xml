@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="spr2-1.war">
+    <root id="archive" name="spr2-23.war">
       <element id="artifact" artifact-name="spr2:war exploded" />
     </root>
   </artifact>

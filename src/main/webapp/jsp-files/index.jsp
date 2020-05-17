@@ -35,17 +35,24 @@
             });
         });
     </script>
+</head>
 <body>
-<h1>ЭМИС-14м</h1><br>
-
+<%
+    HttpServletResponse resp = (HttpServletResponse) response;
+    String login = (String)session.getAttribute("login");
+    if (login == null) {
+        resp.sendRedirect("login.jsp");
+    }
+%>
+<div class="float-right">
+    <a href="${pageContext.request.contextPath}/jsp-files/logout.jsp">Выйти</a>
+</div>
+    <h1 align="center">ЭМИС-14м</h1><br>
 <form class="form-inline">
     <button type="button" class="btn btn-outline-success create">Добавить</button>
-    <input type="searchfield" class="form-control" id="InputSearch" placeholder="Search..." style="width: 80%">
-    <button type="button" class="btn btn-outline-primary">Поиск</button>
-    <button type="button" class="btn btn-outline-dark">Очистить</button>
-</form><br>
-
-<Table class="table">
+    <input type="searchfield" class="form-control" id="InputSearch" placeholder="Search..." onkeyup="tableSearch()">
+</form>
+<Table class="table" id="info-table">
     <tr>
         <th>Фамилия</th>
         <th>Имя</th>
@@ -110,5 +117,25 @@
         </div>
     </div>
 </div>
+<script>
+    function tableSearch() {
+        var phrase = document.getElementById('InputSearch');
+        var table = document.getElementById('info-table');
+        var regPhrase = new RegExp(phrase.value, 'i');
+        var flag = false;
+        for (var i = 1; i < table.rows.length; i++) {
+            flag = false;
+            for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+                flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+                if (flag) break;
+            }
+            if (flag) {
+                table.rows[i].style.display = "";
+            } else {
+                table.rows[i].style.display = "none";
+            }
+        }
+    }
+</script>
 </body>
 </html>

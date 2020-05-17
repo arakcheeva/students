@@ -1,21 +1,44 @@
 package com.company.servlet.entity;
 
-import lombok.Data;
+import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pb_user_session")
+@Table(name = "[UserAuth]")
 @Data
 public class UserSession {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "userSessionSeq", sequenceName = "seq_user_session", initialValue = 1000, allocationSize = 1000)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "login")
+    private String login;
 
-    @Column(nullable = false)
+    @Column(name = "password")
     private String password;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

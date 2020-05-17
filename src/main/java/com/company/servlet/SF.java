@@ -1,14 +1,14 @@
 package com.company.servlet;
 
+import com.company.servlet.entity.UserSession;
+import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import com.company.servlet.entity.User;
 
 public class SF {
-    private static org.hibernate.SessionFactory sf;
-
-    static {
-
+    private static SessionFactory sf;
+    private static void init(){
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         } catch (Exception x){
@@ -16,8 +16,8 @@ public class SF {
         }
 
         Configuration cfg = new Configuration()
-                .addAnnotatedClass(User.class);
-             //   .addAnnotatedClass(UserSession.class);
+                .addAnnotatedClass(User.class)
+                .addAnnotatedClass(UserSession.class);
 
         cfg.setProperty("hibernate.connection.url", "jdbc:sqlserver://localhost\\ARA;database=Useri;CharacterSet=UTF-8");
         cfg.setProperty("hibernate.connection.username", "sa");
@@ -29,9 +29,16 @@ public class SF {
         sf = cfg.buildSessionFactory(builder.build());
     }
 
+    static {
+        init();
+    }
+
     private SF(){}
 
-    public static org.hibernate.SessionFactory getInstance(){
+    public static SessionFactory getInstance(){
+        if(sf == null) {
+            init();
+        }
         return sf;
     }
 }

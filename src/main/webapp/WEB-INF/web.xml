@@ -4,6 +4,15 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.company.servlet.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>mainServlet</servlet-name>
         <servlet-class>com.company.servlet.MainServlet</servlet-class>
